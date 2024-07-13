@@ -15,7 +15,7 @@ PYBIND11_MODULE(emulator_module, m) {
         .def("get_frame", [](const CHIP8Emulator& self) {
             std::vector<uint8_t> frame(64 * 32);
             self.get_frame(frame.data(), frame.size());
-            return py::array_t<uint8_t>({64, 32}, frame.data());
+            return py::array_t<uint8_t>({32, 64}, frame.data());
         })
         .def("set_input", &CHIP8Emulator::set_input)
         .def("get_state", &CHIP8Emulator::get_state)

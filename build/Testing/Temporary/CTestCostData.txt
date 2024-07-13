@@ -1,3 +1,0 @@
-test_chip8_emulator 0 0
----
-test_chip8_emulator
