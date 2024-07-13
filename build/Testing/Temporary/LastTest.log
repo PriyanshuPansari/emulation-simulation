@@ -1,0 +1,69 @@
+Start testing: Jul 13 21:50 IST
+----------------------------------------------------------
+1/1 Testing: test_chip8_emulator
+1/1 Test: test_chip8_emulator
+Command: "/home/undead/projects/emulation/emulation-simulation/build/tests/test_chip8_emulator"
+Directory: /home/undead/projects/emulation/emulation-simulation/build/tests
+"test_chip8_emulator" start time: Jul 13 21:50 IST
+Output:
+----------------------------------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test_chip8_emulator is a Catch v2.13.7 host application.
+Run with -? for options
+
+-------------------------------------------------------------------------------
+CHIP8Emulator initialization
+  Memory is zeroed after initialization
+-------------------------------------------------------------------------------
+/home/undead/projects/emulation/emulation-simulation/tests/test_chip8_emulator.cpp:8
+...............................................................................
+
+/home/undead/projects/emulation/emulation-simulation/tests/test_chip8_emulator.cpp:15: FAILED:
+  REQUIRE( state[i] == 0 )
+with expansion:
+  'ð' == 0
+with message:
+  Memory at index 0 is not zero
+
+-------------------------------------------------------------------------------
+CHIP8Emulator initialization
+  Program counter is set to 0x200 after initialization
+-------------------------------------------------------------------------------
+/home/undead/projects/emulation/emulation-simulation/tests/test_chip8_emulator.cpp:19
+...............................................................................
+
+/home/undead/projects/emulation/emulation-simulation/tests/test_chip8_emulator.cpp:24: FAILED:
+  REQUIRE( pc == 0x200 )
+with expansion:
+  0 == 512 (0x200)
+with message:
+  Program counter is 0, expected 0x200
+
+-------------------------------------------------------------------------------
+CHIP8Emulator instruction execution
+  0x00E0 - CLS instruction clears the display
+-------------------------------------------------------------------------------
+/home/undead/projects/emulation/emulation-simulation/tests/test_chip8_emulator.cpp:33
+...............................................................................
+
+/home/undead/projects/emulation/emulation-simulation/tests/test_chip8_emulator.cpp:51: FAILED:
+  REQUIRE( state[i] == 0 )
+with expansion:
+  'ÿ' == 0
+with message:
+  Display pixel at index 4119 is not cleared
+
+===============================================================================
+test cases: 2 | 2 failed
+assertions: 4 | 1 passed | 3 failed
+
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"test_chip8_emulator" end time: Jul 13 21:50 IST
+"test_chip8_emulator" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jul 13 21:50 IST

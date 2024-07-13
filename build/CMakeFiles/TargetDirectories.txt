@@ -1,0 +1,9 @@
+/home/undead/projects/emulation/emulation-simulation/build/CMakeFiles/chip8_core.dir
+/home/undead/projects/emulation/emulation-simulation/build/CMakeFiles/emulator_module.dir
+/home/undead/projects/emulation/emulation-simulation/build/CMakeFiles/test.dir
+/home/undead/projects/emulation/emulation-simulation/build/CMakeFiles/edit_cache.dir
+/home/undead/projects/emulation/emulation-simulation/build/CMakeFiles/rebuild_cache.dir
+/home/undead/projects/emulation/emulation-simulation/build/tests/CMakeFiles/test_chip8_emulator.dir
+/home/undead/projects/emulation/emulation-simulation/build/tests/CMakeFiles/test.dir
+/home/undead/projects/emulation/emulation-simulation/build/tests/CMakeFiles/edit_cache.dir
+/home/undead/projects/emulation/emulation-simulation/build/tests/CMakeFiles/rebuild_cache.dir

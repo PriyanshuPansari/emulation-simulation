@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: Emulation-Simulation
+Version: 0.1.0
+Summary: A retro game emulator framework with Python bindings for AI research
+Author: Priyanshu Pansari
+Author-email: Priyanshu.Pansari@gmail.com
+Requires-Python: >=3.6
+Requires-Dist: pybind11>=2.4
+Requires-Dist: numpy
+Requires-Dist: pygame

@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/test_chip8_emulator.dir/test_chip8_emulator.cpp.o ../CMakeFiles/chip8_core.dir/cpp/src/chip8_emulator.cpp.o -o test_chip8_emulator 

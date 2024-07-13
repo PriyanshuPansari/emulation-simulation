@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -flto -shared  -o ../src/emulators/emulator_module.cpython-312-x86_64-linux-gnu.so CMakeFiles/emulator_module.dir/cpp/bindings/emulator_bindings.cpp.o CMakeFiles/chip8_core.dir/cpp/src/chip8_emulator.cpp.o 
