@@ -1,0 +1,7 @@
+{
+    "clock_speed": 500,
+    "display_scale": 10,
+    "background_color": [0, 0, 0],
+    "foreground_color": [255, 255, 255],
+    "sound_enabled": true
+}

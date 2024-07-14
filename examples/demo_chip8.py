@@ -1,28 +1,24 @@
 # File: examples/demo_chip8.py
 
 import sys
-sys.path.append('src')  # Add the src directory to the Python path
+sys.path.append('src')
 import argparse
-
 from emulators import CHIP8
 from emulators.display_utils import PygameDisplay
-import numpy as np
 import time
-import pygame
 
-def run_emulator_pygame(rom_path, num_frames=None):
-    emulator = CHIP8()
-    emulator.load_rom(rom_path)
+def run_emulator_pygame(rom_path, config_path="config.json"):
+    emulator = CHIP8(config_path)
+    if not emulator.load_rom(rom_path):
+        print(f"Failed to load ROM: {rom_path}")
+        return
 
-    display = PygameDisplay(emulator.screen_width, emulator.screen_height,key_map=CHIP8.get_key_map())
-
+    display = PygameDisplay(emulator.screen_width, emulator.screen_height,emulator.get_key_map(), config_path)
+    
     quit = False
-    frame_count = 0
-    while not quit and (num_frames is None or frame_count < num_frames):
+    while not quit:
         # Handle input
-        quit = display.handle_input()
-        if quit:
-            break
+        quit = display.handle_input() 
 
         # Update emulator state
         keys = display.get_keys()
@@ -33,14 +29,14 @@ def run_emulator_pygame(rom_path, num_frames=None):
         display.update(frame)
         
         time.sleep(1/60)  # Cap at 60 FPS
-        frame_count += 1
 
     display.close()
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('--rom_path', type=str, help='Specify the ROM name')
-
+    parser = argparse.ArgumentParser(description='Run CHIP-8 ROM')
+    parser.add_argument('--rom_path', type=str, required=True, help='Path to the ROM file')
+    parser.add_argument('--config', type=str, default='config.json', help='Path to the configuration file')
     args = parser.parse_args()
-
+    
     print("Running with Pygame display...")
-    run_emulator_pygame(args.rom_path)
+    run_emulator_pygame(args.rom_path, args.config)

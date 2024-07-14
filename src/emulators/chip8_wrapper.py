@@ -4,12 +4,17 @@ import numpy as np
 from typing import List
 from .base_wrapper import BaseEmulator
 from .emulator_module import CHIP8Emulator as _CHIP8Emulator
+import os
+from .config import Config
 
 class CHIP8(BaseEmulator):
-    def __init__(self):
+    def __init__(self,config_path="config.json"):
         self._emulator = _CHIP8Emulator()
         self.screen_width = 64
         self.screen_height = 32
+        self.config = Config(config_path)
+        self.clock_speed = self.config.get("clock_speed")
+       
 
     def load_rom(self, rom_path: str) -> bool:
         return self._emulator.load_rom(rom_path)
@@ -32,10 +37,24 @@ class CHIP8(BaseEmulator):
     def set_state(self, state: bytes) -> None:
         self._emulator.set_state(list(state))
 
+    def save_state(self, filepath):
+        state = self.get_state()
+        with open(filepath, 'wb') as f:
+            f.write(state)
+
+    def load_state(self, filepath):
+        if not os.path.exists(filepath):
+            return False
+        with open(filepath, 'rb') as f:
+            state = f.read()
+        self.set_state(state)
+        return True
+
     def run_frame(self) -> np.ndarray:
-        for _ in range(10):  # Assuming 600Hz CPU clock and 60Hz display refresh
+        for _ in range( self.clock_speed // 60):  # Assuming 600Hz CPU clock and 60Hz display refresh
             self.step()
         return self.get_display()
+    
     def debug_display(self) -> str:
         frame = self.get_display()
         return '\n'.join([''.join(['#' if pixel else '.' for pixel in row]) for row in frame])

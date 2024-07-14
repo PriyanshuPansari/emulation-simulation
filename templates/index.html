@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHIP-8 AI Comparison</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .emulation-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .emulation-frame {
+            margin: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>CHIP-8 AI Comparison</h1>
+    
+    <div>
+        <h2>Start Emulation</h2>
+        <input type="text" id="rom-path" placeholder="ROM path">
+        <input type="text" id="model-paths" placeholder="Model paths (comma-separated)">
+        <button onclick="startEmulation()">Start Emulation</button>
+    </div>
+
+    <div class="emulation-container" id="emulation-container"></div>
+
+    <div>
+        <h2>Start Training</h2>
+        <input type="text" id="model-name" placeholder="Model name">
+        <button onclick="startTraining()">Start Training</button>
+    </div>
+
+    <div>
+        <canvas id="training-chart"></canvas>
+    </div>
+
+    <script>
+        const socket = io();
+        let trainingChart;
+
+        function startEmulation() {
+            const romPath = document.getElementById('rom-path').value;
+            const modelPaths = document.getElementById('model-paths').value.split(',');
+            
+            fetch('/start_emulation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    rom_path: romPath,
+                    model_paths: modelPaths,
+                }),
+            });
+        }
+
+        function startTraining() {
+            const modelName = document.getElementById('model-name').value;
+            
+            fetch('/start_training', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    model_name: modelName,
+                }),
+            });
+        }
+
+        socket.on('frames', function(frames) {
+            const container = document.getElementById('emulation-container');
+            container.innerHTML = '';
+            
+            for (const [name, frame] of Object.entries(frames)) {
+                const frameElement = document.createElement('div');
+                frameElement.className = 'emulation-frame';
+                frameElement.innerHTML = `
+                    <h3>${name}</h3>
+                    <img src="data:image/png;base64,${frame}" width="320" height="160">
+                `;
+                container.appendChild(frameElement);
+            }
+        });
+
+        socket.on('training_update', function(data) {
+            if (!trainingChart) {
+                const ctx = document.getElementById('training-chart').getContext('2d');
+                trainingChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'Loss',
+                            data: [],
+                            borderColor: 'red',
+                            fill: false
+                        }, {
+                            label: 'Accuracy',
+                            data: [],
+                            borderColor: 'blue',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Training Progress'
+                        },
+                        scales: {
+                            x: {
+                                display: true,
+                                title: {
+                                    display: true,
+                                    text: 'Epoch'
+                                }
+                            },
+                            y: {
+                                display: true,
+                                title: {
+                                    display: true,
+                                    text: 'Value'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            trainingChart.data.labels.push(data.epoch);
+            trainingChart.data.datasets[0].data.push(data.loss);
+            trainingChart.data.datasets[1].data.push(data.accuracy);
+            trainingChart.update();
+        });
+    </script>
+</body>
+</html>
