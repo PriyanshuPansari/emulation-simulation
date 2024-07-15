@@ -1,0 +1,111 @@
+{
+  "metrics": [
+    {
+      "name": "train_loss",
+      "value": 0.0405082143843174,
+      "step": 0
+    },
+    {
+      "name": "val_loss",
+      "value": 0.02704892959445715,
+      "step": 0
+    },
+    {
+      "name": "train_loss",
+      "value": 0.02380915731191635,
+      "step": 1
+    },
+    {
+      "name": "val_loss",
+      "value": 0.015216407366096973,
+      "step": 1
+    },
+    {
+      "name": "train_loss",
+      "value": 0.013271552510559559,
+      "step": 2
+    },
+    {
+      "name": "val_loss",
+      "value": 0.008400822523981333,
+      "step": 2
+    },
+    {
+      "name": "train_loss",
+      "value": 0.007591980742290616,
+      "step": 3
+    },
+    {
+      "name": "val_loss",
+      "value": 0.006936200894415379,
+      "step": 3
+    },
+    {
+      "name": "train_loss",
+      "value": 0.007270951755344868,
+      "step": 4
+    },
+    {
+      "name": "val_loss",
+      "value": 0.008686746936291456,
+      "step": 4
+    },
+    {
+      "name": "train_loss",
+      "value": 0.008833331521600485,
+      "step": 5
+    },
+    {
+      "name": "val_loss",
+      "value": 0.00881306454539299,
+      "step": 5
+    },
+    {
+      "name": "train_loss",
+      "value": 0.008611624129116535,
+      "step": 6
+    },
+    {
+      "name": "val_loss",
+      "value": 0.0071514740120619535,
+      "step": 6
+    },
+    {
+      "name": "train_loss",
+      "value": 0.006741721648722887,
+      "step": 7
+    },
+    {
+      "name": "val_loss",
+      "value": 0.005835612770169973,
+      "step": 7
+    },
+    {
+      "name": "train_loss",
+      "value": 0.005725197494029999,
+      "step": 8
+    },
+    {
+      "name": "val_loss",
+      "value": 0.005681539652869105,
+      "step": 8
+    },
+    {
+      "name": "train_loss",
+      "value": 0.005756026832386851,
+      "step": 9
+    },
+    {
+      "name": "val_loss",
+      "value": 0.006045089336112142,
+      "step": 9
+    }
+  ],
+  "parameters": {},
+  "artifacts": [
+    {
+      "name": "model",
+      "path": "models/simple_cnn_20240714_233027.pth"
+    }
+  ]
+}
